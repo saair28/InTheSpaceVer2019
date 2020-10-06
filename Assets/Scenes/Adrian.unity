@@ -397,7 +397,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.409
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -976,5 +976,9 @@ PrefabInstance:
       propertyPath: CircleImg
       value: 
       objectReference: {fileID: 1362161894}
+    - target: {fileID: 5975824556319900253, guid: b9de895a26e4d2b4c8b42a1a02a911eb, type: 3}
+      propertyPath: progress
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9de895a26e4d2b4c8b42a1a02a911eb, type: 3}
