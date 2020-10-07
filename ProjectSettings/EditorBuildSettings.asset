@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Men\xFA.unity"
     guid: fa03c65a9873758409cf982a4795825b
-  - enabled: 1
-    path: Assets/Scenes/Bruno.unity
-    guid: 510f0f145d0157f49903f8b842d306f5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Derrota.unity
     guid: 22c3211923be7fc4fa6e01e5358d0c6e
