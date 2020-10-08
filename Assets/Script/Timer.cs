@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -9,21 +10,46 @@ public class Timer : MonoBehaviour
 
     public Text VerTiempo;
 
+
+    public float PonerTiempo;
+
+    public float T;
+
     // Start is called before the first frame update
     void Start()
     {
-     
+        PonerTiempo = tiempo;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float t = -Time.time - tiempo;
+        T -= Time.deltaTime;
 
-        string Minutos = ((int)t / 60).ToString();
+        float t = T - tiempo;
 
-        string Segundos = (t % 60).ToString("f0");
+        if (t >= 1)
+        {
 
-        VerTiempo.text = Minutos + ":" + Segundos;
+            string Minutos = ((int)t / 60).ToString();
+
+            string Segundos = (t % 60).ToString("f0");
+
+            VerTiempo.text = Minutos + ":" + Segundos;
+        }
+
+        else if (t <= 0)
+        {
+            T = 0;
+
+            tiempo = PonerTiempo;
+
+            Escena();
+        }
+    }
+
+    public void Escena()
+    {
+        SceneManager.LoadScene("Derrota");
     }
 }

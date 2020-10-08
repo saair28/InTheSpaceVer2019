@@ -29,6 +29,12 @@ public class Player : MonoBehaviour
 
     //
 
+    public GameObject Manos;
+
+    public GameObject Agarra;
+
+    public Transform ZoneInteraction;
+
     Vector3 Velocity;
 
     public Slider FuelSlider;
@@ -55,7 +61,41 @@ public class Player : MonoBehaviour
 
         FuelSlider.value = ActualComb / Combustible;
 
-        Flotar = Input.GetMouseButton(1);
+        Flotar = Input.GetKey(KeyCode.Space);
+
+        if (Manos != null && Manos.GetComponent<Agarrar>().Sujetar == true && Agarra == null)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Agarra = Manos;
+
+                Agarra.GetComponent<Agarrar>().Sujetar = false;
+
+                Agarra.transform.SetParent(ZoneInteraction);
+
+                Agarra.transform.position = ZoneInteraction.position;
+
+                Agarra.GetComponent<Rigidbody>().useGravity = false;
+
+                Agarra.GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
+
+        else if (Agarra != null)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Agarra.GetComponent<Agarrar>().Sujetar = true;
+
+                Agarra.transform.SetParent(null);
+
+                Agarra.GetComponent<Rigidbody>().useGravity = true;
+
+                Agarra.GetComponent<Rigidbody>().isKinematic = false;
+
+                Agarra = null;
+            }
+        }
 
         if (ActualComb >= 0f)
         {
