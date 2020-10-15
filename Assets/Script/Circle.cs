@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class Circle : MonoBehaviour
 {
-    [SerializeField] Image CircleImg;
+    [SerializeField] Image circleImg;
+    public GameObject circle_Img;
+    public GameObject circle;
+    public GameObject circleFill;
+
+    public bool desactivaCircle = false;
     //[SerializeField] Text txtProgress;
 
-    [SerializeField] [Range(0, 1)] float progress = 0f;
+
+    [SerializeField] [Range(0, 1)] public float progress = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +24,23 @@ public class Circle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (progress <= 1)
+        { 
+            if (Input.GetMouseButton(0))
+            {
+                progress = progress + 0.001f;
+                circleImg.fillAmount = progress;
+            
+            }
+        } else if (progress >= 1)
         {
-            progress = progress + 0.001f;
-            CircleImg.fillAmount = progress;
+            desactivaCircle = true;
             
         }
+
+
+
     }
+    
+    
 }
