@@ -6,7 +6,9 @@ public class Agarrar : MonoBehaviour
 {
     public bool Sujetar = true;
 
-    public static Agarrar instance;
+    //public static Agarrar instance;
+
+    public bool agarrado;
 
     public bool Entrar = false;
 
@@ -14,7 +16,7 @@ public class Agarrar : MonoBehaviour
 
     public void Start()
     {
-        instance = this;
+        Player player = new Player();
     }
 
     public void OnTriggerEnter(Collider other)
