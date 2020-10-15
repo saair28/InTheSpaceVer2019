@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
             ActualComb += CombustibleRecarga * Time.deltaTime;
         }
     }
-
+    /*
     public void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Placa"))
@@ -146,5 +146,6 @@ public class Player : MonoBehaviour
 
         }
     }
+    */
 
 }
