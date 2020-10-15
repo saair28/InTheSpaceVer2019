@@ -4,42 +4,60 @@ using UnityEngine;
 
 public class PosicionOxigeno : MonoBehaviour
 {
-    public bool Sujetar = true;
+    public bool loPosicionas  = false;
 
-    public static PosicionOxigeno instance;
-
-    public bool Entrar = false;
-
-    public CabinaOxigeno cabina;
+    public bool agarrado;
 
     public void Start()
     {
-        instance = this;
+        //  instance = this;
+
+        
     }
 
     private void Update()
     {
-        cabina = CabinaOxigeno.instance;
+        // cabina = CabinaOxigeno.instance;
+
+        Player player = new Player();
+
+        agarrado = player.LoSujeta;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ponlo")
         {
-            cabina.GetComponent<CabinaOxigeno>().Posicion = this.gameObject;
+            CabinaOxigeno cabina = other.GetComponent<CabinaOxigeno>();
 
-            Entrar = true;
+            if (cabina != null && cabina.PreguntarLibre())
+            {
+                cabina.Posicion = this.gameObject;
+
+
+                loPosicionas = true;
+            }
+            else
+            {
+                loPosicionas = false;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+   /* private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Ponlo")
         {
+            CabinaOxigeno cabina = other.GetComponent<CabinaOxigeno>();
 
-            cabina.GetComponent<CabinaOxigeno>().Posicion = null;
+            if (cabina != null && cabina.PreguntarLibre())
+            {
+                cabina.Posicion = ;
 
-            Entrar = false;
+
+                Entrar = false;
+            }
         }
     }
+    */
 }

@@ -10,30 +10,47 @@ public class CabinaOxigeno : MonoBehaviour
 
     public Transform Colocar;
 
-    public PosicionOxigeno PosiOxi;
+    public bool loSujeta;
 
-    public static CabinaOxigeno instance;
+    PosicionOxigeno posi = new PosicionOxigeno();
+
+    public Player player;
+
+    //public PosicionOxigeno PosiOxi;
+
+    //public static CabinaOxigeno instance;
 
     // Start is called before the first frame update
     void Start()
     {
-       instance = this ;
+        // instance = this ;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        PosiOxi = PosicionOxigeno.instance;
+        player = Player.instance;
 
-        if (Posicion != null && PosiOxi.GetComponent<PosicionOxigeno>().Sujetar == true && target == null)
+        loSujeta = player.GetComponent<Player>().LoSujeta;
+
+        if (Posicion != null && target == null && loSujeta != true)
         {
-            target = Posicion;
-
-            target.GetComponent<PosicionOxigeno>().Sujetar = false;
-
+            if (loSujeta != true)
+            {
+                target = Posicion;
+            }
+            else { }
         }
 
-        else if (target != null && PosiOxi.GetComponent<PosicionOxigeno>().Sujetar == false && Posicion != null)
+        Mantener();
+
+    }
+
+    public void Mantener()
+    {
+
+        if (target != null && Posicion != null)
         {
 
             target.transform.SetParent(Colocar);
@@ -43,6 +60,24 @@ public class CabinaOxigeno : MonoBehaviour
             target.GetComponent<Rigidbody>().useGravity = false;
 
             target.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        else
+        {
+
+        }
+    }
+
+    public bool PreguntarLibre()
+    {
+        if (Posicion != null)
+        {
+            return false;
+        }
+
+        else
+        {
+            return true;
         }
     }
 }

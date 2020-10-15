@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public float Speed = 1f;
-    
+
+    public static Player instance;
+
     //JECTPACK
 
     public float JetpackFuerza = 3f;
@@ -27,7 +29,9 @@ public class Player : MonoBehaviour
 
     public float timer = 0f;
 
-    //
+    //SUJETAR
+
+    public bool LoSujeta;
 
     public GameObject Manos;
 
@@ -46,6 +50,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         ActualComb = Combustible;
+
+        instance = this;
     }
 
     // Update is called once per frame
@@ -78,6 +84,8 @@ public class Player : MonoBehaviour
                 Agarra.GetComponent<Rigidbody>().useGravity = false;
 
                 Agarra.GetComponent<Rigidbody>().isKinematic = true;
+
+                LoSujeta = true;
             }
         }
 
@@ -94,6 +102,8 @@ public class Player : MonoBehaviour
                 Agarra.GetComponent<Rigidbody>().isKinematic = false;
 
                 Agarra = null;
+
+                LoSujeta = false;
             }
         }
 
