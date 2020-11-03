@@ -12,10 +12,6 @@ public class CabinaOxigeno : MonoBehaviour
 
     public bool loSujeta;
 
-    PosicionOxigeno posi = new PosicionOxigeno();
-
-    public Player player;
-
     //public PosicionOxigeno PosiOxi;
 
     //public static CabinaOxigeno instance;
@@ -27,12 +23,11 @@ public class CabinaOxigeno : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        player = Player.instance;
+       // Player player = new Player();
 
-        loSujeta = player.GetComponent<Player>().LoSujeta;
+        loSujeta = Player.instance.LoSujeta;
 
         if (Posicion != null && target == null && loSujeta != true)
         {

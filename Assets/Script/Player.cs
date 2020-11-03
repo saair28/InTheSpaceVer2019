@@ -151,6 +151,7 @@ public class Player : MonoBehaviour
             ActualComb += CombustibleRecarga * Time.deltaTime;
         }
     }
+
     /*
     public void OnCollisionStay(Collision collision)
     {
@@ -158,6 +159,8 @@ public class Player : MonoBehaviour
         {
 
         }
+
+        else { }
     }
     */
 
