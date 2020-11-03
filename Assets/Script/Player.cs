@@ -149,12 +149,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnCollisionStay(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Placa"))
         {
 
         }
+
+        else { }
     }
 
 }

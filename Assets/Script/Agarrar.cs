@@ -14,9 +14,9 @@ public class Agarrar : MonoBehaviour
 
     public CabinaOxigeno cabina;
 
-    public void Start()
+    public void Update()
     {
-        Player player = new Player();
+       // Player player = new Player();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -38,4 +38,5 @@ public class Agarrar : MonoBehaviour
             Entrar = false;
         }
     }
+    
 }
