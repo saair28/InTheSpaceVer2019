@@ -10,6 +10,7 @@ public class Cables : MonoBehaviour
     public GameObject my_circle;
     Circle my_circle_script;
     public GameObject circleFill;
+    public bool prenderLuces;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,10 @@ public class Cables : MonoBehaviour
         {
             DesactivaCircle();
         }
-            
+        
+        
+        DeboPrenderLuces();
+        
     }
 
     void OnMouseOver()
@@ -56,6 +60,18 @@ public class Cables : MonoBehaviour
         circle.SetActive(false);
         circle_Img.SetActive(false);
         my_circle_script.progress = 0;
+        prenderLuces = true;
+    }
 
+    public bool DeboPrenderLuces()
+    {
+        if (prenderLuces == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Circle : MonoBehaviour
 {
     [SerializeField] Image circleImg;
-    public GameObject circle_Img;
-    public GameObject circle;
-    public GameObject circleFill;
+    //public GameObject circle_Img;
+    //public GameObject circle;
+    //public GameObject circleFill;
 
     public bool desactivaCircle = false;
     //[SerializeField] Text txtProgress;

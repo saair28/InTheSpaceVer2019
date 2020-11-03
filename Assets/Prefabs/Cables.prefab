@@ -118,6 +118,8 @@ MonoBehaviour:
   message: 0
   circle_Img: {fileID: 2345172929095407233}
   circle: {fileID: 2345172929923323606}
+  my_circle: {fileID: 2345172929095407233}
+  circleFill: {fileID: 2345172929919480434}
 --- !u!1 &2345172929095407233
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,10 +424,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2345172929923323606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cea5df42611f194a881659a03d71cb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a31d25f768e89141a614ce94cac43d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   circleImg: {fileID: 2345172929919480432}
+  desactivaCircle: 0
   progress: 0
 --- !u!1 &2345172930527960695
 GameObject:
@@ -437,7 +440,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2345172930527960694}
-  - component: {fileID: 2345172930527960693}
   m_Layer: 0
   m_Name: MessageSpawner
   m_TagString: Untagged
@@ -460,19 +462,3 @@ Transform:
   m_Father: {fileID: 2345172928946043051}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2345172930527960693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6815964938357808844, guid: b9de895a26e4d2b4c8b42a1a02a911eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2345172930527960695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 440cf6fa542ac4440872333087c6ce17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Message: {fileID: 4091882663250810542, guid: 004d05c2abe9db44c90b77a24a70e27c, type: 3}
-  SpawnerPos: {fileID: 2345172930527960694}
-  my_Cables: {fileID: 2345172928946043040}

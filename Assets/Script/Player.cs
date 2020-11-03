@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float Speed = 1f;
+    public float Speed;
 
     public static Player instance;
 
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         Velocity = Vector3.zero;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -64,6 +65,8 @@ public class Player : MonoBehaviour
         Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
 
         rb.MovePosition(playerMovement + transform.position);
+        */
+        PlayerMovement();
 
         FuelSlider.value = ActualComb / Combustible;
 
@@ -149,7 +152,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    /*
+    public void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Placa"))
         {
@@ -158,5 +162,13 @@ public class Player : MonoBehaviour
 
         else { }
     }
+    */
 
+    void PlayerMovement()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
+        transform.Translate(playerMovement, Space.Self);
+    }
 }
