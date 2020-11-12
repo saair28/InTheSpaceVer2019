@@ -26,7 +26,7 @@ public class Circle : MonoBehaviour
     {
         if (progress <= 1)
         { 
-            if (Input.GetMouseButton(0))
+            if (Input.GetKey(KeyCode.E))
             {
                 progress = progress + 0.001f;
                 circleImg.fillAmount = progress;
@@ -34,6 +34,7 @@ public class Circle : MonoBehaviour
             }
         } else if (progress >= 1)
         {
+
             desactivaCircle = true;
             
         }

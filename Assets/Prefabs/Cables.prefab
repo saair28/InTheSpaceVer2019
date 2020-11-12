@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.7637721, y: 1.521049, z: 1.767456}
+  m_Center: {x: 0.024716794, y: 0.2605245, z: -0.023918152}
 --- !u!114 &2345172928946043055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   circle_Img: {fileID: 2345172929095407233}
   circle: {fileID: 2345172929923323606}
   my_circle: {fileID: 2345172929095407233}
+  my_circle_script: {fileID: 0}
   circleFill: {fileID: 2345172929919480434}
   prenderLuces: 0
 --- !u!1 &2345172929095407233

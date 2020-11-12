@@ -5,55 +5,74 @@ using UnityEngine;
 public class Cables : MonoBehaviour
 {
     public bool message = false;
-    public GameObject circle_Img;
-    public GameObject circle;
+    //public GameObject circle_Img;
+    //public GameObject circle;
     public GameObject my_circle;
+    public GameObject canvasCircle;
     Circle my_circle_script;
-    public GameObject circleFill;
+    //public GameObject circleFill;
     public bool prenderLuces;
+    public bool enRangoDeArreglo = false;
 
     // Start is called before the first frame update
     void Start()
     {
         my_circle_script = my_circle.GetComponent<Circle>();
+
+        my_circle.SetActive(false);
+        canvasCircle.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        ActivarCables();
+        ManejoDeCables();
+        /*
         if(my_circle_script.desactivaCircle == true)
         {
             DesactivaCircle();
-        }
+        }*/
         
         
         DeboPrenderLuces();
         
     }
-
+    /*
     void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             message = true;
-            Debug.Log("activaCables");
+            //Debug.Log("activaCables");
         }
-    }
-    public void ActivarCables()
-    {
-        if (message == true)
-        {
-            circle.SetActive(true);
-            circle_Img.SetActive(true);
-        }
-        else
-        {
-            circle.SetActive(false);
-            circle_Img.SetActive(false);
-        }
-    }
+    }*/
 
+    public void ManejoDeCables()
+    {   
+        if(enRangoDeArreglo == true)
+        { 
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                my_circle.SetActive(true);
+                canvasCircle.SetActive(true);
+            }
+            else if (my_circle_script.desactivaCircle == true)
+            {
+                my_circle.SetActive(false);
+                canvasCircle.SetActive(false);
+                //my_circle_script.progress = 0;
+                prenderLuces = true; ;
+            }
+        } else
+        {
+            my_circle.SetActive(false);
+            canvasCircle.SetActive(false);
+            my_circle_script.progress = 0;
+            
+        }
+    }
+    /*
     public void DesactivaCircle()
     {
         circleFill.SetActive(false);
@@ -61,7 +80,7 @@ public class Cables : MonoBehaviour
         circle_Img.SetActive(false);
         my_circle_script.progress = 0;
         prenderLuces = true;
-    }
+    }*/
 
     public bool DeboPrenderLuces()
     {
@@ -72,6 +91,23 @@ public class Cables : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            enRangoDeArreglo = true;
+            
+        } 
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            enRangoDeArreglo = false;
+
         }
     }
 }
