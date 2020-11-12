@@ -32,7 +32,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2345172929923323605}
-  - {fileID: 2345172930527960694}
   - {fileID: 2345172929374336869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -110,12 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 0
-  circle_Img: {fileID: 2345172929095407233}
-  circle: {fileID: 2345172929923323606}
-  my_circle: {fileID: 2345172929095407233}
-  my_circle_script: {fileID: 0}
-  circleFill: {fileID: 2345172929919480434}
+  my_circle: {fileID: 2345172929923323606}
+  canvasCircle: {fileID: 2345172929374336870}
   prenderLuces: 0
+  enRangoDeArreglo: 0
 --- !u!1 &2345172929095407233
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +220,7 @@ RectTransform:
   m_Children:
   - {fileID: 2345172929095407232}
   m_Father: {fileID: 2345172928946043051}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -373,6 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2345172929923323605}
+  - component: {fileID: 147492528425426193}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -394,33 +392,18 @@ Transform:
   m_Father: {fileID: 2345172928946043051}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2345172930527960695
-GameObject:
+--- !u!114 &147492528425426193
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2345172930527960694}
-  m_Layer: 0
-  m_Name: MessageSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2345172930527960694
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2345172930527960695}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0213335, y: -0.40999985, z: -12.140007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2345172928946043051}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 2345172929923323606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a31d25f768e89141a614ce94cac43d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleImg: {fileID: 2345172929919480432}
+  desactivaCircle: 0
+  progress: 0
