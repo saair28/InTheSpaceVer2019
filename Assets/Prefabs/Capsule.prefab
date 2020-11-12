@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 12
-  JetpackFuerza: 24
+  JetpackFuerza: 30
   Flotar: 0
   Combustible: 60
   CombustibleGastado: 20
