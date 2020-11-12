@@ -35,6 +35,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Update()
     {
+        CursorControl();
+        CamControl();
+
         if (Physics.Linecast(transform.position, transform.position + transform.localRotation*camera_offset, out hit))
         {
             t_camera.localPosition = new Vector3(0, 0, -Vector3.Distance(transform.position, hit.point));
@@ -47,8 +50,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        CursorControl();
-        CamControl();
+        //CursorControl();
+        //CamControl();
         /*
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
