@@ -21,13 +21,29 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform Target, Player;
     float mouseX, mouseY;
 
+    public Transform t_camera;
+
+    private RaycastHit hit;
+    private Vector3 camera_offset;
+
     void Start()
     {
-        /*
+
+        camera_offset = t_camera.localPosition;
         
-        */
     }
 
+    void Update()
+    {
+        if (Physics.Linecast(transform.position, transform.position + transform.localRotation*camera_offset, out hit))
+        {
+            t_camera.localPosition = new Vector3(0, 0, -Vector3.Distance(transform.position, hit.point));
+        }
+        else
+        {
+            t_camera.localPosition = Vector3.Lerp(t_camera.localPosition,camera_offset,Time.deltaTime);
+        }
+    }
 
     void LateUpdate()
     {
@@ -43,6 +59,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         transform.position = target.position - transform.forward * dstFromTarget;
         */
+
         
     }
     void CamControl()
