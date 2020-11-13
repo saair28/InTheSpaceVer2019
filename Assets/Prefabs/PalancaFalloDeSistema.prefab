@@ -296,7 +296,7 @@ MonoBehaviour:
   AreaActiva: {fileID: 2326750070057516455}
   startMarker: {fileID: 2326750070216767937}
   endMarker: {fileID: 2326750068540358851}
-  speed: 0.05
+  speed: 0.005
   journeyLength: 1
 --- !u!1 &2326750069183568471
 GameObject:
