@@ -37,11 +37,11 @@ public class Luces : MonoBehaviour
         {
             if (cronometro >= 2 && cronometro <= 3 || cronometro >= 4 && cronometro <= 5)
             {
-                miLuz.intensity = Mathf.PingPong(2, 2);
+                miLuz.intensity = Mathf.PingPong(9, 30);
             }
             else
             {
-                miLuz.intensity = Mathf.PingPong(1, 2);
+                miLuz.intensity = Mathf.PingPong(12, 30);
             }
 
         }
@@ -50,7 +50,7 @@ public class Luces : MonoBehaviour
         {
             cronometro = 0;
 
-            miLuz.intensity = Mathf.PingPong(3, 20);
+            miLuz.intensity = Mathf.PingPong(15, 30);
         }
 
         if (cronometro >= 5)

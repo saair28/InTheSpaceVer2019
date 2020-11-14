@@ -20,7 +20,7 @@ public class Player2 : MonoBehaviour
 
     public bool deteccionSuelo = false;
 
-    public Rigidbody rb;
+    //public Rigidbody rb;
 
     public Transform cam;
 
@@ -41,6 +41,8 @@ public class Player2 : MonoBehaviour
     public LayerMask groundMask;
 
     bool isGrounded;
+
+    public float jumpHeight = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -115,12 +117,18 @@ public class Player2 : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f *gravity);
+            Debug.Log("JUMP");
+        }
+
 
 
 
 
     }
-
+    /*
     void PlayerSalto()
     {
         salto = Input.GetKey(KeyCode.Space);
@@ -160,4 +168,5 @@ public class Player2 : MonoBehaviour
         }
 
     }
+    */
 }
