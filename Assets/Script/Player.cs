@@ -9,26 +9,30 @@ public class Player : MonoBehaviour
 
     public static Player instance;
 
+    public float saltoFuerza = 5.0f;
+
+    public bool salto = false;
+
     //JECTPACK
+    /*
+        public float JetpackFuerza = 3f;
 
-    public float JetpackFuerza = 3f;
+        public bool Flotar = false;
 
-    public bool Flotar = false;
+        public float Combustible = 100f;
 
-    public float Combustible = 100f;
+        public float CombustibleGastado = 20f;
 
-    public float CombustibleGastado = 20f;
+        public float CombustibleRecarga = 20f;
 
-    public float CombustibleRecarga = 20f;
+        public float RetrasoRecarga = 2f;
 
-    public float RetrasoRecarga = 2f;
+        public float ActualComb;
 
-    public float ActualComb;
+        public bool TenerCombustible = true;
 
-    public bool TenerCombustible = true;
-
-    public float timer = 0f;
-
+        public float timer = 0f;
+    */
     //SUJETAR
 
     public bool LoSujeta;
@@ -41,7 +45,9 @@ public class Player : MonoBehaviour
 
     Vector3 Velocity;
 
-    public Slider FuelSlider;
+    public bool deteccionSuelo = false;
+
+    // public Slider FuelSlider;
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -49,7 +55,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        ActualComb = Combustible;
+        //ActualComb = Combustible;
 
         instance = this;
     }
@@ -68,9 +74,9 @@ public class Player : MonoBehaviour
         */
         PlayerMovement();
 
-        FuelSlider.value = ActualComb / Combustible;
+        // FuelSlider.value = ActualComb / Combustible;
 
-        Flotar = Input.GetKey(KeyCode.Space);
+        //Flotar = Input.GetKey(KeyCode.Space);
 
         if (Manos != null && Manos.GetComponent<Agarrar>().Sujetar == true && Agarra == null)
         {
@@ -91,7 +97,7 @@ public class Player : MonoBehaviour
                 LoSujeta = true;
             }
         }
-
+        
         else if (Agarra != null)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -109,66 +115,85 @@ public class Player : MonoBehaviour
                 LoSujeta = false;
             }
         }
+        /*
+                if (ActualComb >= 0f)
+                {
+                    if (Flotar && TenerCombustible)
+                    {
+                        rb.AddForce(Vector2.up * JetpackFuerza);
 
-        if (ActualComb >= 0f)
-        {
-            if (Flotar && TenerCombustible)
-            {
-                rb.AddForce(Vector2.up * JetpackFuerza);
+                        ActualComb -= CombustibleGastado * Time.deltaTime;
+                    }
+                    else if (!Flotar && TenerCombustible)
+                    {
+                        Recarga();
+                    }
+                }
 
-                ActualComb -= CombustibleGastado * Time.deltaTime;
+                if (ActualComb <= 0)
+                {
+                    TenerCombustible = false;
+
+                    ActualComb = 0;
+                }
+
+                if (!TenerCombustible)
+                {
+                    timer += Time.deltaTime;
+
+                    if (timer >= RetrasoRecarga)
+                    {
+                        TenerCombustible = true;
+
+                        timer = 0;
+                    }
+                }
             }
-            else if (!Flotar && TenerCombustible)
+
+            public void Recarga()
             {
-                Recarga();
+                if (ActualComb < Combustible)
+                {
+                    ActualComb += CombustibleRecarga * Time.deltaTime;
+                }
+            }
+        */
+        /*
+        public void OnCollisionStay(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Placa"))
+            {
+
+            }
+
+            else { }
+        }
+        */
+
+        void PlayerMovement()
+        {
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
+            transform.Translate(playerMovement, Space.Self);
+
+           salto =  Input.GetKey(KeyCode.Space);
+
+            Vector3 suelo = transform.TransformDirection(Vector3.down);
+
+            if (Physics.Raycast(transform.position, suelo, 3.07f))
+            {
+                deteccionSuelo = true;
+            }
+            else
+            {
+                deteccionSuelo = false;
+            }
+
+            if (salto && deteccionSuelo)
+            {
+                rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
             }
         }
-
-        if (ActualComb <= 0)
-        {
-            TenerCombustible = false;
-
-            ActualComb = 0;
-        }
-
-        if (!TenerCombustible)
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= RetrasoRecarga)
-            {
-                TenerCombustible = true;
-
-                timer = 0;
-            }
-        }
-    }
-
-    public void Recarga()
-    {
-        if (ActualComb < Combustible)
-        {
-            ActualComb += CombustibleRecarga * Time.deltaTime;
-        }
-    }
-
-    /*
-    public void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Placa"))
-        {
-
-        }
-
-        else { }
-    }
-    */
-
-    void PlayerMovement()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
-        transform.Translate(playerMovement, Space.Self);
     }
 }
