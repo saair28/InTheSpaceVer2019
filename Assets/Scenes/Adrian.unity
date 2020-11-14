@@ -1062,6 +1062,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5577633623437547752, guid: 8f3c7166ccecadc4597969d64f7e97f1,
+        type: 3}
+      propertyPath: RotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5577633624510191665, guid: 8f3c7166ccecadc4597969d64f7e97f1,
         type: 3}
       propertyPath: FuelSlider
