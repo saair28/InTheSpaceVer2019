@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
 
             Vector3 suelo = transform.TransformDirection(Vector3.down);
 
-            if (Physics.Raycast(transform.position, suelo, 1.50f))
+            if (Physics.Raycast(transform.position, suelo, 3.07f))
             {
                 deteccionSuelo = true;
             }
