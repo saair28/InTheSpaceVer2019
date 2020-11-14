@@ -470,6 +470,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b15c28bd01461c49b63ca2a75738771, type: 3}
+--- !u!54 &1635976710 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5577633624510191664, guid: 8f3c7166ccecadc4597969d64f7e97f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5577633623057932840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1697602115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1078,11 @@ PrefabInstance:
       propertyPath: FuelSlider
       value: 
       objectReference: {fileID: 1993265175}
+    - target: {fileID: 5577633624510191665, guid: 8f3c7166ccecadc4597969d64f7e97f1,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1635976710}
     - target: {fileID: 5577633624510191674, guid: 8f3c7166ccecadc4597969d64f7e97f1,
         type: 3}
       propertyPath: m_Name

@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float Speed;
+    public float speed = 500;
 
     public static Player instance;
 
     public float saltoFuerza = 5.0f;
 
     public bool salto = false;
+
 
     //JECTPACK
     /*
@@ -49,20 +50,23 @@ public class Player : MonoBehaviour
 
     // public Slider FuelSlider;
 
-    Rigidbody rb;
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         //ActualComb = Combustible;
 
         instance = this;
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
+        
         /*
         Velocity = Vector3.zero;
         float h = Input.GetAxis("Horizontal");
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
 
         rb.MovePosition(playerMovement + transform.position);
         */
-        PlayerMovement();
+        //PlayerMovement();
 
         // FuelSlider.value = ActualComb / Combustible;
 
@@ -92,7 +96,7 @@ public class Player : MonoBehaviour
 
                 Agarra.GetComponent<Rigidbody>().useGravity = false;
 
-                Agarra.GetComponent<Rigidbody>().isKinematic = true;
+                //Agarra.GetComponent<Rigidbody>().isKinematic = true;
 
                 LoSujeta = true;
             }
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour
 
                 Agarra.GetComponent<Rigidbody>().useGravity = true;
 
-                Agarra.GetComponent<Rigidbody>().isKinematic = false;
+                //Agarra.GetComponent<Rigidbody>().isKinematic = false;
 
                 Agarra = null;
 
@@ -169,31 +173,49 @@ public class Player : MonoBehaviour
             else { }
         }
         */
+        PlayerMovement();
+    }
 
-        void PlayerMovement()
+    void PlayerMovement()
+    {
+        
+        if (Input.GetKey("w"))
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
-            transform.Translate(playerMovement, Space.Self);
+            rb.AddForce(0, 0,  speed * Time.deltaTime);
+        }
+        if (Input.GetKey("s"))
+        {
+            rb.AddForce(0, 0, -speed * Time.deltaTime);
+        }
+        if (Input.GetKey("d"))
+        {
+            rb.AddForce(speed * Time.deltaTime, 0, 0);
+        }
+        if (Input.GetKey("a"))
+        {
+            rb.AddForce(-speed * Time.deltaTime, 0, 0);
+        }
+        //float h = Input.GetAxis("Horizontal");
+        //float v = Input.GetAxis("Vertical");
+        //Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
+        //transform.Translate(playerMovement, Space.Self);
 
-           salto =  Input.GetKey(KeyCode.Space);
+        salto = Input.GetKey(KeyCode.Space);
 
-            Vector3 suelo = transform.TransformDirection(Vector3.down);
+        Vector3 suelo = transform.TransformDirection(Vector3.down);
 
-            if (Physics.Raycast(transform.position, suelo, 3.07f))
-            {
-                deteccionSuelo = true;
-            }
-            else
-            {
-                deteccionSuelo = false;
-            }
+        if (Physics.Raycast(transform.position, suelo, 3.07f))
+        {
+            deteccionSuelo = true;
+        }
+        else
+        {
+            deteccionSuelo = false;
+        }
 
-            if (salto && deteccionSuelo)
-            {
-                rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
-            }
+        if (salto && deteccionSuelo)
+        {
+            rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
         }
     }
 }
