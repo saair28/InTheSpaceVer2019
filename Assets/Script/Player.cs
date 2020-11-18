@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         /*
         Velocity = Vector3.zero;
         float h = Input.GetAxis("Horizontal");
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
 
         rb.MovePosition(playerMovement + transform.position);
-        */
+        
         //PlayerMovement();
 
         // FuelSlider.value = ActualComb / Combustible;
@@ -123,6 +123,7 @@ public class Player : MonoBehaviour
                 LoSujeta = false;
             }
         }
+        */
         /*
                 if (ActualComb >= 0f)
                 {
