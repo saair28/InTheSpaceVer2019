@@ -9,15 +9,17 @@ public class Player2 : MonoBehaviour
     public float saltoFuerza = 5.0f;
 
     public bool salto = false;
-
+    
     public bool LoSujeta;
-
+    
     public GameObject Manos;
 
     public GameObject Agarra;
 
     public Transform ZoneInteraction;
 
+    public bool loToma = false;
+    
     public bool deteccionSuelo = false;
 
     //public Rigidbody rb;
@@ -59,15 +61,22 @@ public class Player2 : MonoBehaviour
             {
                 Agarra = Manos;
 
-                Agarra.GetComponent<Agarrar>().Sujetar = false;
+                /* Agarra.GetComponent<Agarrar>().Sujetar = false;
 
-                Agarra.transform.SetParent(ZoneInteraction);
+                 Agarra.transform.parent =ZoneInteraction.transform;
 
-                Agarra.transform.position = ZoneInteraction.position;
+                 Agarra.GetComponent<BoxCollider>().enabled = false;
 
-                Agarra.GetComponent<Rigidbody>().useGravity = false;
+                // this.transform.parent = ZoneInteraction.transform;
 
-                //Agarra.GetComponent<Rigidbody>().isKinematic = true;
+                // Agarra.transform.position = ZoneInteraction.position;
+
+                 Agarra.GetComponent<Rigidbody>().useGravity = false;
+
+                 //Agarra.GetComponent<Rigidbody>().isKinematic = true;
+
+                 */
+                loToma = true;
 
                 LoSujeta = true;
             }
@@ -79,18 +88,24 @@ public class Player2 : MonoBehaviour
             {
                 Agarra.GetComponent<Agarrar>().Sujetar = true;
 
-                Agarra.transform.SetParent(null);
+                /*  Agarra.transform.parent = null;
 
-                Agarra.GetComponent<Rigidbody>().useGravity = true;
+                 // this.transform.parent = null;
 
-                //Agarra.GetComponent<Rigidbody>().isKinematic = false;
+                  Agarra.GetComponent<BoxCollider>().enabled = true;
 
+                  Agarra.GetComponent<Rigidbody>().useGravity = true;
+
+                 // Agarra.GetComponent<Rigidbody>().isKinematic = false;
+                 */
                 Agarra = null;
+
+                loToma = false;
 
                 LoSujeta = false;
             }
         }
-
+       
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)

@@ -2609,5 +2609,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Capsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8370624841808587498, guid: 780f6814cd5ab4443b658a5531060be4,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.1106194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370624841808587498, guid: 780f6814cd5ab4443b658a5531060be4,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.23364788
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370624841808587498, guid: 780f6814cd5ab4443b658a5531060be4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.4470766
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370624841808587498, guid: 780f6814cd5ab4443b658a5531060be4,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.30748546
+      objectReference: {fileID: 0}
+    - target: {fileID: 8370624841808587501, guid: 780f6814cd5ab4443b658a5531060be4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.212
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780f6814cd5ab4443b658a5531060be4, type: 3}
