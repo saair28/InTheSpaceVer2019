@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 500;
+    public float speed;
+
+    public float MaxSpeed;
+
+    public GameObject referencia;
 
     public static Player instance;
 
@@ -54,7 +58,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         //ActualComb = Combustible;
 
@@ -173,10 +177,29 @@ public class Player : MonoBehaviour
             else { }
         }
         */
+        
+    }
+
+    void FixedUpdate()
+    {
         PlayerMovement();
     }
 
     void PlayerMovement()
+    {
+        float MHorizontal = Input.GetAxis("Horizontal");
+        float MVertical = Input.GetAxis("Vertical");
+
+        if (rb.velocity.magnitude > MaxSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * MaxSpeed;
+        }
+
+        rb.AddForce(MVertical * referencia.transform.forward * speed);
+        rb.AddForce(MHorizontal * referencia.transform.right * speed);
+    }
+
+    void PlayerMovement1()
     {
         
         if (Input.GetKey("w"))
