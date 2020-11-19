@@ -11,6 +11,8 @@ public class pickUp : MonoBehaviour
 
     public Rigidbody rb;
 
+    public bool tomado = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,29 +22,48 @@ public class pickUp : MonoBehaviour
     {
         estaAgarrado = Player.instance.loToma;
 
-        if (estaAgarrado == true)
+        if (tomado == true)
         {
-            EstaCerca();
-        }
-        else
-        {
-            Sale();
-        }
 
+            if (estaAgarrado == true)
+            {
+                EstaCerca();
+            }
+            else
+            {
+                Sale();
+            }
+        }
        
     }
     private void EstaCerca()
     {
-        GetComponent<BoxCollider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
         this.transform.position = manos.position;
         this.transform.parent = GameObject.Find("Agarrar").transform;
+        GetComponent<Collider>().enabled = false;
     }
 
      void Sale()
     {
         this.transform.parent = null;
         GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<Collider>().enabled = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Sujetar")
+        {
+            tomado = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Sujetar")
+        {
+            tomado = false;
+        }
     }
 }

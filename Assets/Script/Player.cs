@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
 
     public bool salto = false;
 
-    
 
+   // public bool estaSaltando = false;
 
    
     //SUJETAR
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public bool deteccionSuelo = false;
 
     public bool loToma = false;
+
+    public GameObject colision;
 
     // public Slider FuelSlider;
 
@@ -79,6 +81,9 @@ public class Player : MonoBehaviour
                  //Agarra.GetComponent<Rigidbody>().isKinematic = true;
 
                  */
+
+                colision.GetComponent<BoxCollider>().enabled = true;
+
                 loToma = true;
 
                 LoSujeta = true;
@@ -105,6 +110,8 @@ public class Player : MonoBehaviour
 
                 loToma = false;
 
+                colision.GetComponent<BoxCollider>().enabled = false;
+
                 LoSujeta = false;
             }
         }
@@ -120,8 +127,10 @@ public class Player : MonoBehaviour
 
     void PlayerMovement()
     {
-        float MHorizontal = Input.GetAxis("Horizontal");
-        float MVertical = Input.GetAxis("Vertical");
+        salto = Input.GetKeyDown(KeyCode.Space);
+
+        float MHorizontal = Input.GetAxisRaw("Horizontal");
+        float MVertical = Input.GetAxisRaw("Vertical");
 
         if (rb.velocity.magnitude > MaxSpeed)
         {
@@ -130,23 +139,33 @@ public class Player : MonoBehaviour
 
         rb.AddForce(MVertical * referencia.transform.forward * speed);
         rb.AddForce(MHorizontal * referencia.transform.right * speed);
-
-        salto = Input.GetKey(KeyCode.Space);
+/*
+        if (MVertical == 0 && MHorizontal == 0 && estaSaltando == false)
+        {
+            rb.velocity = Vector3.zero;
+        }
+      */
+       
 
         Vector3 suelo = transform.TransformDirection(Vector3.down);
 
         if (Physics.Raycast(transform.position, suelo, 3.07f))
         {
             deteccionSuelo = true;
+
+           // estaSaltando = false;
         }
         else
         {
             deteccionSuelo = false;
+           // estaSaltando = true;
         }
 
         if (salto && deteccionSuelo)
         {
             rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
+
+         //  estaSaltando = true;
         }
     }
 
@@ -190,6 +209,21 @@ public class Player : MonoBehaviour
         if (salto && deteccionSuelo)
         {
             rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Placa")
+        {
+            other.gameObject.GetComponent<PlacaPresion>().Presionar();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Placa")
+        {
+            other.gameObject.GetComponent<PlacaPresion>().Soltar();
         }
     }
 }
