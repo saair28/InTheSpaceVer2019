@@ -23,7 +23,7 @@ public class Agarrar : MonoBehaviour
     {
         if (other.tag == "Sujetar")
         {
-            other.GetComponentInParent<Player2>().Manos = this.gameObject;
+            other.GetComponentInParent<Player>().Manos = this.gameObject;
 
             Entrar = true;
         }
@@ -33,7 +33,7 @@ public class Agarrar : MonoBehaviour
     {
         if (other.tag == "Sujetar")
         {
-            other.GetComponentInParent<Player2>().Manos = null;
+            other.GetComponentInParent<Player>().Manos = null;
 
             Entrar = false;
         }

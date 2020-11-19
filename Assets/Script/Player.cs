@@ -17,27 +17,10 @@ public class Player : MonoBehaviour
 
     public bool salto = false;
 
+    
 
-    //JECTPACK
-    /*
-        public float JetpackFuerza = 3f;
 
-        public bool Flotar = false;
-
-        public float Combustible = 100f;
-
-        public float CombustibleGastado = 20f;
-
-        public float CombustibleRecarga = 20f;
-
-        public float RetrasoRecarga = 2f;
-
-        public float ActualComb;
-
-        public bool TenerCombustible = true;
-
-        public float timer = 0f;
-    */
+   
     //SUJETAR
 
     public bool LoSujeta;
@@ -51,6 +34,8 @@ public class Player : MonoBehaviour
     Vector3 Velocity;
 
     public bool deteccionSuelo = false;
+
+    public bool loToma = false;
 
     // public Slider FuelSlider;
 
@@ -71,20 +56,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        /*
-        Velocity = Vector3.zero;
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        Vector3 playerMovement = new Vector3(h, 0f, v) * Speed * Time.deltaTime;
-
-        rb.MovePosition(playerMovement + transform.position);
         
-        //PlayerMovement();
-
-        // FuelSlider.value = ActualComb / Combustible;
-
-        //Flotar = Input.GetKey(KeyCode.Space);
 
         if (Manos != null && Manos.GetComponent<Agarrar>().Sujetar == true && Agarra == null)
         {
@@ -92,93 +64,53 @@ public class Player : MonoBehaviour
             {
                 Agarra = Manos;
 
-                Agarra.GetComponent<Agarrar>().Sujetar = false;
+                /* Agarra.GetComponent<Agarrar>().Sujetar = false;
 
-                Agarra.transform.SetParent(ZoneInteraction);
+                 Agarra.transform.parent =ZoneInteraction.transform;
 
-                Agarra.transform.position = ZoneInteraction.position;
+                 Agarra.GetComponent<BoxCollider>().enabled = false;
 
-                Agarra.GetComponent<Rigidbody>().useGravity = false;
+                // this.transform.parent = ZoneInteraction.transform;
 
-                //Agarra.GetComponent<Rigidbody>().isKinematic = true;
+                // Agarra.transform.position = ZoneInteraction.position;
+
+                 Agarra.GetComponent<Rigidbody>().useGravity = false;
+
+                 //Agarra.GetComponent<Rigidbody>().isKinematic = true;
+
+                 */
+                loToma = true;
 
                 LoSujeta = true;
             }
         }
-        
+
         else if (Agarra != null)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Agarra.GetComponent<Agarrar>().Sujetar = true;
 
-                Agarra.transform.SetParent(null);
+                /*  Agarra.transform.parent = null;
 
-                Agarra.GetComponent<Rigidbody>().useGravity = true;
+                 // this.transform.parent = null;
 
-                //Agarra.GetComponent<Rigidbody>().isKinematic = false;
+                  Agarra.GetComponent<BoxCollider>().enabled = true;
 
+                  Agarra.GetComponent<Rigidbody>().useGravity = true;
+
+                 // Agarra.GetComponent<Rigidbody>().isKinematic = false;
+                 */
                 Agarra = null;
+
+                loToma = false;
 
                 LoSujeta = false;
             }
         }
-        */
-        /*
-                if (ActualComb >= 0f)
-                {
-                    if (Flotar && TenerCombustible)
-                    {
-                        rb.AddForce(Vector2.up * JetpackFuerza);
 
-                        ActualComb -= CombustibleGastado * Time.deltaTime;
-                    }
-                    else if (!Flotar && TenerCombustible)
-                    {
-                        Recarga();
-                    }
-                }
-
-                if (ActualComb <= 0)
-                {
-                    TenerCombustible = false;
-
-                    ActualComb = 0;
-                }
-
-                if (!TenerCombustible)
-                {
-                    timer += Time.deltaTime;
-
-                    if (timer >= RetrasoRecarga)
-                    {
-                        TenerCombustible = true;
-
-                        timer = 0;
-                    }
-                }
-            }
-
-            public void Recarga()
-            {
-                if (ActualComb < Combustible)
-                {
-                    ActualComb += CombustibleRecarga * Time.deltaTime;
-                }
-            }
-        */
-        /*
-        public void OnCollisionStay(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("Placa"))
-            {
-
-            }
-
-            else { }
-        }
-        */
         
+
     }
 
     void FixedUpdate()
@@ -198,6 +130,24 @@ public class Player : MonoBehaviour
 
         rb.AddForce(MVertical * referencia.transform.forward * speed);
         rb.AddForce(MHorizontal * referencia.transform.right * speed);
+
+        salto = Input.GetKey(KeyCode.Space);
+
+        Vector3 suelo = transform.TransformDirection(Vector3.down);
+
+        if (Physics.Raycast(transform.position, suelo, 3.07f))
+        {
+            deteccionSuelo = true;
+        }
+        else
+        {
+            deteccionSuelo = false;
+        }
+
+        if (salto && deteccionSuelo)
+        {
+            rb.AddForce(new Vector3(0, saltoFuerza, 0), ForceMode.Impulse);
+        }
     }
 
     void PlayerMovement1()
