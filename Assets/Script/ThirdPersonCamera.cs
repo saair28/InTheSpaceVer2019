@@ -21,23 +21,26 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform Target, Player;
     float mouseX, mouseY;
 
-    public Transform t_camera;
+    public Transform Obstruction;
+    float zoomSpeed = 2f;
 
-    private RaycastHit hit;
-    private Vector3 camera_offset;
+    //public Transform t_camera;
+
+    //private RaycastHit hit;
+    //private Vector3 camera_offset;
 
     void Start()
     {
-
-        camera_offset = t_camera.localPosition;
+        Obstruction = Target;
+        //camera_offset = t_camera.localPosition;
         
     }
 
     void Update()
     {
         CursorControl();
-        CamControl();
-
+        
+        /*
         if (Physics.Linecast(transform.position, transform.position + transform.localRotation*camera_offset, out hit))
         {
             t_camera.localPosition = new Vector3(0, 0, -Vector3.Distance(transform.position, hit.point));
@@ -45,13 +48,14 @@ public class ThirdPersonCamera : MonoBehaviour
         else
         {
             t_camera.localPosition = Vector3.Lerp(t_camera.localPosition,camera_offset,Time.deltaTime);
-        }
+        }*/
     }
 
     void LateUpdate()
     {
         //CursorControl();
-        //CamControl();
+        CamControl();
+        ViewObstructed();
         /*
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -71,7 +75,7 @@ public class ThirdPersonCamera : MonoBehaviour
         mouseY -= Input.GetAxis("Mouse Y") * RotationSpeed;
         mouseY = Mathf.Clamp(mouseY, -35, 60);
 
-        transform.LookAt(Target);
+        //transform.LookAt(Target);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -84,6 +88,32 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         
+    }
+
+    void ViewObstructed()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Target.position - transform.position, out hit, 4.5f))
+        {
+            if(hit.collider.gameObject.tag != "Player")
+            {
+                Obstruction = hit.transform;
+                Obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                if(Vector3.Distance(Obstruction.position, transform.position) >= 3f && Vector3.Distance(transform.position, Target.position) >= 1.5f)
+                {
+                    transform.Translate(Vector3.forward * zoomSpeed * Time.deltaTime);
+                }
+            }
+            else
+            {
+                Obstruction.gameObject.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                if(Vector3.Distance(transform.position, Target.position) < 4.5f)
+                {
+                    transform.Translate(Vector3.back * zoomSpeed * Time.deltaTime);
+                }
+            }
+        }
+
     }
 
     void CursorControl()

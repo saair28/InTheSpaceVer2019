@@ -14,6 +14,7 @@ TagManager:
   - PlayerInteractionZone
   - Ground
   - Destinatario
+  - Environment
   layers:
   - Default
   - TransparentFX
