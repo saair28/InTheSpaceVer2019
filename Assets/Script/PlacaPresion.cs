@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlacaPresion : MonoBehaviour
 {
-    bool isclosed = false;
+    public bool ispressed = false;
 
     public float x;
 
@@ -12,34 +12,51 @@ public class PlacaPresion : MonoBehaviour
 
     public float z;
 
+    public float restarY;
+
     public GameObject placa;
 
     public GameObject Puerta;
 
-    Rigidbody rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
+
+        x = transform.position.x;
+
+        y = transform.position.y;
+
+        z = transform.position.z;
     }
 
     void Update()
     {
-        if (!isclosed)
+        if (!ispressed)
         {
-            Vector3 Arriba =placa.transform.position = new Vector3(-7.426799f, 80.39f, 30.9f);
+            Vector3 Arriba = new Vector3(x, y, z);
 
-            rb.MovePosition(Arriba);
+            transform.position = Arriba;
         }
 
-        else if (isclosed)
+        else if (ispressed)
         {
-            Vector3 Abajo =placa.transform.position = new Vector3(-7.426799f, 80.03f, 30.9f);
+            Vector3 Abajo = new Vector3(x, y - restarY, z);
 
-            rb.MovePosition(Abajo);
+            transform.position = Abajo;
         }
     }
 
+    public void Presionar()
+    {
+        ispressed = true;
+    }
+
+    public void Soltar()
+    {
+        ispressed = false;
+    }
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -57,6 +74,7 @@ public class PlacaPresion : MonoBehaviour
     {
         isclosed = false;
     }
+    */
 }
 
 // -7.426799 80.39 30.9 ,    80.03
