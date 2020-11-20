@@ -18,7 +18,7 @@ public class pickUp : MonoBehaviour
 
     private void Update()
     {
-        estaAgarrado = Player.instance.loToma;
+        estaAgarrado = Player2.instance.loToma;
 
         if (estaAgarrado == true)
         {
